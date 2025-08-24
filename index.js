@@ -3,11 +3,14 @@ const express = require("express");
 const morgan = require("morgan");
 const app = express();
 const cors = require("cors");
-
-//Middleware for all
+const connectDB=require("./dbConnect")
+const dotenv = require("dotenv");
+dotenv.config();
 
 app.use(express.json({limit:"10mb"}));
 app.use(morgan("common"));
+
+
 app.use(
   cors({
     credentials: true,
@@ -19,6 +22,8 @@ app.get("/", (req, res) => {
 });
 
 
+
+connectDB()
 app.listen(4000, () => {
   console.log("listening on port 4000");
 });
